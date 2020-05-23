@@ -20,7 +20,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         source: './files-to-upload'
-        target: ${{ secrets.TARGET }}
+        target: './html/javascript-action'
 
     - name: Deploy with scp Docker
       uses: ./.github/actions/deploy-with-scp-docker
@@ -29,4 +29,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         source: './files-to-upload'
-        target: ${{ secrets.TARGET }}
+        target: './html/docker-action'
