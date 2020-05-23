@@ -41,13 +41,13 @@ sshpass -e scp -r -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no
 
 This is a private action, because of this we have to use the path to the location of the action in this repository
 
-``` yaml
+```yaml
 uses: ./.github/actions/deploy-with-scp-docker
 with:
   hostname: ${{ secrets.HOSTNAME }}
   username: ${{ secrets.USERNAME }}
   password: ${{ secrets.PASSWORD }}
-  source: '.'
+  source: "."
   target: ${{ secrets.TARGET }}
 ```
 
@@ -110,14 +110,51 @@ main()
 This is a private action, because of this we have to use the path to the location of the action in this repository.
 You can set secrets in the settings page of your repository.
 
-``` yaml
+```yaml
 uses: ./.github/actions/deploy-with-sftp-javascript
 with:
   hostname: ${{ secrets.HOSTNAME }}
   username: ${{ secrets.USERNAME }}
   password: ${{ secrets.PASSWORD }}
-  source: '.'
+  source: "."
   target: ${{ secrets.TARGET }}
 ```
 
 For more information checkout the [documentation about creating a JavaScript container action](https://help.github.com/en/actions/creating-actions/creating-a-javascript-action) and the [GitHub Actions Toolkit](https://github.com/actions/toolkit) is a really great collections of useful packages for developing GitHub JavaScript actions.
+
+## Usage in GitHub workflow
+
+```yml
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      - name: Deploy with sftp JavaScript
+        uses: ./.github/actions/deploy-with-sftp-javascript
+        with:
+          hostname: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: "./files-to-upload"
+          target: "./html/javascript-action"
+
+      - name: Deploy with scp Docker
+        uses: ./.github/actions/deploy-with-scp-docker
+        with:
+          hostname: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          source: "./files-to-upload"
+          target: "./html/docker-action"
+```
