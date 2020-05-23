@@ -1,0 +1,16 @@
+{
+    "name": "deploy-with-scp-docker",
+    "version": "1.0.0",
+    "description": "GitHub action for deploying files with scp",
+    "main": "index.js",
+    "author": "raaaimund",
+    "license": "MIT",
+    "private": true,
+    "scripts": {
+      "build": "copyfiles action.yml Dockerfile entrypoint.sh dist/"
+    },
+    "devDependencies": {
+      "copyfiles": "^2.2.0"
+    }
+  }
+  

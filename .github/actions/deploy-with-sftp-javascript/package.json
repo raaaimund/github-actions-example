@@ -1,0 +1,19 @@
+{
+  "name": "deploy-with-sftp-javascript",
+  "version": "1.0.0",
+  "description": "GitHub action for deploying files with sftp",
+  "main": "index.js",
+  "author": "raaaimund",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "ncc build index.js -o dist"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.4",
+    "ssh2-sftp-client": "^5.1.2"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.22.1"
+  }
+}

@@ -1,0 +1,23 @@
+name: "Deploy with sftp"
+description: "GitHub action for deploying files with sftp"
+inputs:
+  hostname:
+    description: "Hostname"
+    required: true
+  username:
+    description: "Username"
+    required: true
+  password:
+    description: "Password"
+    required: true
+  source:
+    description: "Source directory"
+    required: true
+    default: "."
+  target:
+    description: "Target directory"
+    required: true
+    default: "/"
+runs:
+  using: "node12"
+  main: "dist/index.js"
