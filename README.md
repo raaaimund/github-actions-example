@@ -39,6 +39,18 @@ export SSHPASS=$INPUT_PASSWORD
 sshpass -e scp -r -q -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no $INPUT_SOURCE $INPUT_USERNAME@$INPUT_HOSTNAME:$INPUT_TARGET
 ```
 
+This is a private action, because of this we have to use the path to the location of the action in this repository
+
+``` yaml
+uses: ./.github/actions/deploy-with-scp-docker
+with:
+  hostname: ${{ secrets.HOSTNAME }}
+  username: ${{ secrets.USERNAME }}
+  password: ${{ secrets.PASSWORD }}
+  source: '.'
+  target: ${{ secrets.TARGET }}
+```
+
 For more information checkout the [documentation about creating a Docker container action](https://help.github.com/en/actions/creating-actions/creating-a-docker-container-action) and the [documentation about Dockerfile support](https://help.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions).
 
 ## Deploy with sftp (JavaScript Action)
@@ -93,6 +105,19 @@ main()
   .catch((err) => {
     core.setFailed(err.message);
   });
+```
+
+This is a private action, because of this we have to use the path to the location of the action in this repository.
+You can set secrets in the settings page of your repository.
+
+``` yaml
+uses: ./.github/actions/deploy-with-sftp-javascript
+with:
+  hostname: ${{ secrets.HOSTNAME }}
+  username: ${{ secrets.USERNAME }}
+  password: ${{ secrets.PASSWORD }}
+  source: '.'
+  target: ${{ secrets.TARGET }}
 ```
 
 For more information checkout the [documentation about creating a JavaScript container action](https://help.github.com/en/actions/creating-actions/creating-a-javascript-action) and the [GitHub Actions Toolkit](https://github.com/actions/toolkit) is a really great collections of useful packages for developing GitHub JavaScript actions.

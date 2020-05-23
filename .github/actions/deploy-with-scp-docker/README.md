@@ -29,7 +29,8 @@ Use this action to deploy files with scp.
 
 ## Example usage
 
-This is a private action, because of this we use the path to the location of the action in this repository
+This is a private action, because of this we have to use the path to the location of the action in this repository.
+You can set secrets in the settings page of your repository.
 
 ``` yaml
 uses: ./.github/actions/deploy-with-scp-docker
