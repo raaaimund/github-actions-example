@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: Deploy with sftp JavaScript
+      uses: ./.github/actions/deploy-with-sftp-javascript
+      with:
+        hostname: ${{ secrets.HOSTNAME }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        source: './files-to-upload'
+        target: ${{ secrets.TARGET }}
+
+    - name: Deploy with scp Docker
+      uses: ./.github/actions/deploy-with-scp-docker
+      with:
+        hostname: ${{ secrets.HOSTNAME }}
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        source: './files-to-upload'
+        target: ${{ secrets.TARGET }}
