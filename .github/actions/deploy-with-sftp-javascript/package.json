@@ -10,7 +10,7 @@
     "build": "ncc build index.js -o dist"
   },
   "dependencies": {
-    "@actions/core": "^1.2.4",
+    "@actions/core": "^1.2.6",
     "ssh2-sftp-client": "^5.1.2"
   },
   "devDependencies": {
